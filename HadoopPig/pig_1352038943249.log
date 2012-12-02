@@ -1,0 +1,39 @@
+Backend error message during job submission
+-------------------------------------------
+java.io.IOException: Failed to set permissions of path: \tmp\hadoop-ujihiro\mapred\staging\ujihiro-232258815\.staging to 0700
+	at org.apache.hadoop.fs.FileUtil.checkReturnValue(FileUtil.java:689)
+	at org.apache.hadoop.fs.FileUtil.setPermission(FileUtil.java:662)
+	at org.apache.hadoop.fs.RawLocalFileSystem.setPermission(RawLocalFileSystem.java:509)
+	at org.apache.hadoop.fs.RawLocalFileSystem.mkdirs(RawLocalFileSystem.java:344)
+	at org.apache.hadoop.fs.FilterFileSystem.mkdirs(FilterFileSystem.java:189)
+	at org.apache.hadoop.mapreduce.JobSubmissionFiles.getStagingDir(JobSubmissionFiles.java:116)
+	at org.apache.hadoop.mapred.JobClient$2.run(JobClient.java:918)
+	at org.apache.hadoop.mapred.JobClient$2.run(JobClient.java:912)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Unknown Source)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1136)
+	at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:912)
+	at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:886)
+	at org.apache.hadoop.mapred.jobcontrol.Job.submit(Job.java:378)
+	at org.apache.hadoop.mapred.jobcontrol.JobControl.startReadyJobs(JobControl.java:247)
+	at org.apache.hadoop.mapred.jobcontrol.JobControl.run(JobControl.java:279)
+	at java.lang.Thread.run(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher$1.run(MapReduceLauncher.java:260)
+
+Pig Stack Trace
+---------------
+ERROR 1066: Unable to open iterator for alias kabuka_input
+
+org.apache.pig.impl.logicalLayer.FrontendException: ERROR 1066: Unable to open iterator for alias kabuka_input
+	at org.apache.pig.PigServer.openIterator(PigServer.java:857)
+	at org.apache.pig.tools.grunt.GruntParser.processDump(GruntParser.java:682)
+	at org.apache.pig.tools.pigscript.parser.PigScriptParser.parse(PigScriptParser.java:303)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:189)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:165)
+	at org.apache.pig.tools.grunt.Grunt.exec(Grunt.java:84)
+	at org.apache.pig.Main.run(Main.java:430)
+	at org.apache.pig.Main.main(Main.java:111)
+Caused by: java.io.IOException: Job terminated with anomalous status FAILED
+	at org.apache.pig.PigServer.openIterator(PigServer.java:849)
+	... 7 more
+================================================================================
